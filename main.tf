@@ -1,6 +1,13 @@
 terraform {
   required_version = ">= 1.3.0"
 
+  backend "azurerm" {
+    resource_group_name  = "RG1"
+    storage_account_name = "fasstorage90"
+    container_name       = "tfstate"
+    key                  = "dev.terraform.tfstate"
+  }
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -15,12 +22,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "RG1"
+  name     = "RG4"
   location = "West US 2"
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "faslanstr45" # Storage account name must be lowercase, 3-24 characters
+  name                     = "faslanstr4545"
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
   account_tier             = "Standard"
