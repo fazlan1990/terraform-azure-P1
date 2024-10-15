@@ -7,7 +7,6 @@ terraform {
       version = ">= 3.43.0"
     }
   }
-   
 }
 
 provider "azurerm" {
@@ -21,9 +20,6 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "faslanstr45"
+  name                     = "faslanstr45"          # Storage account name must be lowercase, 3-24 characters
   location                 = azurerm_resource_group.rg.location
-  resource_group_name      = azurerm_resource_group.rg.name
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
+  r
