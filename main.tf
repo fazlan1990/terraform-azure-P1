@@ -35,7 +35,7 @@ resource "azurerm_storage_account" "storage" {
 }
 
 resource "azurerm_storage_account" "storage1" {
-  name                     = "faslanstr4555"
+  name                     = "faslanstr454567821"
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
   account_tier             = "Standard"
