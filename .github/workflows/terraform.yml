@@ -29,6 +29,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Check for Terraform Lock
+      run: |
+        LOCK_ID=$(terraform show -json | jq -r '.lock_id')
+        if [ "$LOCK_ID" != "null" ]; then
+          echo "State is locked. Unlocking..."
+          terraform force-unlock $LOCK_ID
+        else
+          echo "No lock found."
+        fi
+
     - name: 'Terraform Format'
       uses: hashicorp/terraform-github-actions@master
       with:
