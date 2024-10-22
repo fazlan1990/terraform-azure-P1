@@ -22,7 +22,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "RG4"
+  name     = "RG6"
   location = "West US 2"
 }
 
