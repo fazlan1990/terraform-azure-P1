@@ -1,0 +1,48 @@
+name: 1-terraform_updated_action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+    runs-on: ubuntu-latest
+    environment: dev
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.4.5
+
+    - name: Terraform Format
+      run: terraform fmt -check -recursive  # You can include `-recursive` if needed for multi-directory
+
+    - name: Terraform Init
+      run: terraform init -input=false
+      working-directory: 1-Creating_storage
+
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: 1-Creating_storage
+
+    - name: Terraform Plan
+      run: terraform plan -lock=false
+      working-directory: 1-Creating_storage
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'
+      run: terraform apply -auto-approve
+      working-directory: 1-Creating_storage
