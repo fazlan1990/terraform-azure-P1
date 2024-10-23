@@ -1,4 +1,4 @@
-name: Terraform
+name: 2-Terraform_new_action1
 
 on:
   workflow_dispatch:
