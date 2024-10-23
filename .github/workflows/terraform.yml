@@ -27,14 +27,14 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
-    - name: 'Terraform Format'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 1.4.5
-        tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "1-Creating_storage"
+    - name: setup terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
         
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
