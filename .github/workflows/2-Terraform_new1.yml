@@ -43,7 +43,7 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-      id: plan
+      id: plan1
       run: terraform plan -lock=false
       if: github.event_name == 'pull_request'
 
