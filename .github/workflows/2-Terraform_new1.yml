@@ -48,7 +48,7 @@ jobs:
       if: github.event_name == 'pull_request'
 
     - name: Terraform Plan Status
-      if: steps.plan.outcome == 'failure'
+      if: steps.plan1.outcome == 'failure'
       run: exit 1
 
     - name: Terraform Apply
