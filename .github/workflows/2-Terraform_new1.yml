@@ -43,12 +43,12 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-      id: plan
+      id: plan1
       run: terraform plan -lock=false
       #if: github.event_name == 'pull_request'
 
     - name: Terraform Plan Status
-      if: steps.plan.outcome == 'failure'
+      if: steps.plan1.outcome == 'failure'
       run: exit 1
 
     - name: Terraform Apply
